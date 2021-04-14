@@ -111,7 +111,7 @@ class HSEB:
         if not os.path.exists(hsebs_output_folder_full_path):
             os.mkdir(hsebs_output_folder_full_path)
 
-        hseb_output_file_full_path = os.path.join(hsebs_output_folder_full_path, u'%d.log' % year)
+        hseb_output_file_full_path = os.path.join(hsebs_output_folder_full_path, u'hseb-%d.log' % year)
         if os.path.exists(hseb_output_file_full_path):
             Utils.run_log(u'remove old file...')
             os.remove(hseb_output_file_full_path)
