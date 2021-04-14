@@ -78,12 +78,13 @@ class HSEB:
         contents = []
         for days_diff in range((end - begin).days + 1):
             day = begin + datetime.timedelta(days=days_diff)
+            today = int(day.strftime("%w"))
             day_hs_position = HSEB.calculate_hs_position_by_days_diff(first_hs_position, days_diff)
             day_eb_position = HSEB.calculate_eb_position_by_days_diff(first_eb_position, days_diff)
             day_hseb = HSEB.get_hseb_by_position(day_hs_position, day_eb_position)
             day_hs = day_hseb[0]
             day_eb = day_hseb[1]
-            line = u'%s\t%s%s' % (day, day_hs, day_eb)
+            line = u'%s\t%d\t%s%s' % (day, today, day_hs, day_eb)
             contents.append(line)
         return contents
 
