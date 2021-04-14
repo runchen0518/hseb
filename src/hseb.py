@@ -15,8 +15,7 @@ from src.utils import Utils
 HEAVENLY_STEMS = [u'甲', u'乙', u'丙', u'丁', u'戊', u'己', u'庚', u'辛', u'壬', u'癸']
 EARTHLY_BRANCHES = [u'子', u'丑', u'寅', u'卯', u'辰', u'巳', u'午', u'未', u'申', u'酉', u'戌', u'亥']
 
-CONF_FILE_PATH = u'confs/hseb.conf'
-HSEBS_OUTPUT_FOLDER = u'hsebs'
+HSEB_CONF_FILE_NAME = u'hseb.conf'
 
 
 class HSEB:
@@ -35,15 +34,14 @@ class HSEB:
 
     @staticmethod
     def pre_process():
-        current_folder_path = os.path.dirname(__file__)
-        project_path = os.path.dirname(current_folder_path)
-        conf_file_full_path = os.path.join(project_path, CONF_FILE_PATH)
+        conf_folder_full_path = Utils.get_conf_folder_full_path()
+        hseb_conf_file_full_path = os.path.join(conf_folder_full_path, HSEB_CONF_FILE_NAME)
 
-        if not os.path.exists(conf_file_full_path) or not os.path.isfile(conf_file_full_path):
-            Utils.run_log(u'conf file error! full path: %s' % conf_file_full_path)
+        if not os.path.exists(hseb_conf_file_full_path) or not os.path.isfile(hseb_conf_file_full_path):
+            Utils.run_log(u'conf file error! full path: %s' % hseb_conf_file_full_path)
             sys.exit(-11)
 
-        with open(conf_file_full_path, 'r') as fp:
+        with open(hseb_conf_file_full_path, 'r') as fp:
             for line in fp:
                 results = line.strip().split()
                 if len(results) != 2:
@@ -105,22 +103,20 @@ class HSEB:
 
     @staticmethod
     def write_to_files(year, contents):
-        current_folder_path = os.path.dirname(__file__)
-        project_path = os.path.dirname(current_folder_path)
-        hsebs_output_folder_full_path = os.path.join(project_path, HSEBS_OUTPUT_FOLDER)
+        hsebs_output_folder_full_path = Utils.get_hsebs_output_folder_full_path()
         if not os.path.exists(hsebs_output_folder_full_path):
             os.mkdir(hsebs_output_folder_full_path)
 
-        hseb_output_file_full_path = os.path.join(hsebs_output_folder_full_path, u'hseb-%d.log' % year)
+        hseb_output_file_full_path = Utils.get_hseb_output_file_full_path(year)
         if os.path.exists(hseb_output_file_full_path):
             Utils.run_log(u'remove old file...')
             os.remove(hseb_output_file_full_path)
 
-        Utils.run_log(u'write to output file: %s' % hseb_output_file_full_path)
+        Utils.run_log(u'write to hseb file: %s' % hseb_output_file_full_path)
         with open(hseb_output_file_full_path, 'w') as fp:
             for line in contents:
                 fp.write('%s\n' % line)
-        Utils.run_log(u'done!\n')
+        Utils.run_log(u'done!')
 
     @staticmethod
     def calculate_hs_position_by_days_diff(anchor_hs_position, days_diff):
