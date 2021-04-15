@@ -10,7 +10,7 @@ import sys
 
 from src.utils import Utils
 
-WUYE_CONF_FILE_PATH = u'wuye.conf'
+WUYE_CONF_FILE_PATH = u'wuye.ini'
 WUYE_OUTPUT_FOLDER = u'wuye'
 
 
