@@ -18,7 +18,7 @@ class Utils:
 
     @staticmethod
     def run_log(log):
-        print log
+        print(log)
 
     @staticmethod
     def calculate_days_diff(refer_year, refer_month, refer_day, target_year, target_month, target_day):
