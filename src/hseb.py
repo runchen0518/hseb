@@ -114,8 +114,7 @@ class HSEB:
 
         Utils.run_log(u'write to hseb file: %s' % hseb_output_file_full_path)
         with open(hseb_output_file_full_path, 'w') as fp:
-            for line in contents:
-                fp.write('%s\n' % line)
+            fp.write('\n'.join(contents) + '\n')
         Utils.run_log(u'done!')
 
     @staticmethod

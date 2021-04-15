@@ -55,8 +55,7 @@ class Wuye:
 
         Utils.run_log(u'write to wuye file: %s' % wuye_output_file_full_path)
         with open(wuye_output_file_full_path, 'w') as fp:
-            for line in contents:
-                fp.write('%s\n' % line)
+            fp.write('\n'.join(contents) + '\n')
         Utils.run_log(u'done!')
 
     @staticmethod
