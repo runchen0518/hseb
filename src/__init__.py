@@ -20,7 +20,7 @@ if sys.version_info.major == 2:
 
 def main():
     year_from = 2019
-    year_to = 2021
+    year_to = 2022
 
     hseb(year_from=year_from, year_to=year_to)
 
